@@ -5,10 +5,10 @@ Gem::Specification.new do |s|
   s.version     = WineAndDine::VERSION
   s.date        = '2018-02-15'
   s.summary     = "Wine and Dine"
-  s.description = "Browse and book a table for two at some of the best restaurants in the U.S."
-  s.authors     = ["Ariana Begrer"]
+  s.description = "Browse and book a table for two at some of the most expensive restaurants in top U.S. cities"
+  s.authors     = ["Ariana Berger"]
   s.email       = 'ariana.berger@gmail.com'
-  s.files       = ["lib/wine-and-dine.rb"]
+  # s.files       = ["lib/wine-and-dine.rb"]
   # s.homepage    = 'http://rubygems.org/gems/wine-and-dine'
   # s.license     = 'MIT'
   # s.executables << 'wine-and-dine'
