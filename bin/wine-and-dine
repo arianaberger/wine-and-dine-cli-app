@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+
+require_relative '../config/environment' #why is it not working with just this line?
+require_relative '../lib/cli'
+
+
+CommandLineInterface.new.call

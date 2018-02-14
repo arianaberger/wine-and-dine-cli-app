@@ -5,31 +5,38 @@ require 'colorize'
 
 class CommandLineInterface
 
-  def run
+  def call
+    welcome
   end
 
-  def choose_city
+  def welcome
     puts "Oh no! You forgot it's you and your boo's anniversay AGAIN! Good thing they"
     puts "reminded you this morning by telling you how excited they are for what you have"
     puts "planned tonight. Looks like you'll need to make some dinner reservations asap!"
     puts ""
     puts "@};---   @};---   @};---   @};---   @};---   @};---   @};---   @};---   @};---".colorize(:red)
     puts ""
-    puts "First off, please enter which romantic destination you would like to fly to on your private jet tonight:"
+    puts "First, enter the number of the romantic destination you'd like to fly to on your private jet tonight:"
     puts "1. NYC"
     puts "2. Miami"
     puts "3. Washington DC"
     puts "4. Los Angeles"
 
+    choose_city
+  end
+
+  def choose_city
     input = gets.strip
-    if input == "1" || input == "NYC"
+    if input == "1"
       #execute NYC method for list of restaurants 1-5
-      puts "Let's check out the restaurants in NYC"
-    elsif input == "2" || input == "Miami"
+      puts "Let's check out the restaurants in NYC..."
+        #get info from restaurant list for NYC
+          #pull into on an individual restaurants
+    elsif input == "2"
       puts "Let's check out the restaurants in Miami"
-    elsif input == "3" || input == "Washington DC" || input == "DC"
+    elsif input == "3"
       puts "Let's check out the restaurants in DC"
-    elsif input == "4" || input == "Los Angeles" || input == "LA"
+    elsif input == "4"
       puts "Let's check out the restaurants in LA"
     else
       puts "I'm sorry, please enter the number or city name you'd like to dine in tonight:"
