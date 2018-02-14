@@ -1,9 +1,4 @@
-require_relative '../lib/restaurants.rb'
-require_relative '../lib/scraper.rb'
-require 'nokogiri'
-require 'colorize'
-
-class CommandLineInterface
+class WineAndDine::CLI
 
   def call
     welcome
