@@ -1,4 +1,4 @@
-module WineAndDine #why is this module not working?
+module WineAndDine #this module is reference throughout my lib files
 end
 
-require_relative '../config/environment'
+require_relative '../config/environment' #this holds all of my requirements
