@@ -11,11 +11,14 @@ class WineAndDine::Scraper
     doc = Nokogiri::HTML(open(BASE_PATH + "#{city}-restaurant-listings"))
 
     restaurants_array = []
-    binding.pry
 
     doc.css("div.rest-row-info").each do |restaurant|
+      # unless restaurant.css("div.rest-row-pricing").text != "$ $ $ $" >>how to only see priciest?
       restaurant_hash = {
-        :name => 
+        :name => restaurant.css("span.rest-row-name-text").text,
+        :food_type => restaurant.css("span.rest-row-meta--cuisine").text,
+        :times => restaurant.css("a.rest-row-times-btn").text.strip, #fix this! might need to iterate over divs
+        :price => restaurant.css("div.rest-row-pricing").text.strip
       }
       restaurants_array << restaurant_hash
     end

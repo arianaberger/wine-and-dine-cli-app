@@ -32,7 +32,6 @@ class WineAndDine::CLI
     elsif input == "2"
       puts "Retrieving the best restaurants in Miami..."
       get_list("miami") #make dynamic?
-
     elsif input == "3"
       puts "Let's check out the restaurants in DC"
     elsif input == "4"
