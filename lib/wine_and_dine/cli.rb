@@ -28,8 +28,11 @@ class WineAndDine::CLI
       list_nyc
         #get info from restaurant list for NYC
           #pull into on an individual restaurants
+
     elsif input == "2"
-      puts "Let's check out the restaurants in Miami"
+      puts "Retrieving the best restaurants in Miami..."
+      get_list("miami") #make dynamic?
+
     elsif input == "3"
       puts "Let's check out the restaurants in DC"
     elsif input == "4"
@@ -51,6 +54,10 @@ class WineAndDine::CLI
       puts "Which would one would you like to know more about?"
       input = gets.strip
     end
+  end
+
+  def get_list(city)
+    WineAndDine::Scraper.scrape_restaurants_list(city)
   end
 
 end

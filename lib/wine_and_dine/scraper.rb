@@ -1,18 +1,21 @@
-class WineAndDine::scraper
+class WineAndDine::Scraper
 
-  def city 
-    "miami"
-  end
+  BASE_PATH = "https://www.opentable.com/"
 
-  def get_page(city) #test for Miami
-    Nokogiri::HTML(open(https://www.opentable.com/"#{city}"-restaurant-listings))
+  # def get_page(city) #test for Miami
+  #   Nokogiri::HTML(open(BASE_PATH + "#{city}-restaurant-listings"))
+  # end
 
-  def self.scrape_restaurants_list(city_url)
+  def self.scrape_restaurants_list(city)
+
+    doc = Nokogiri::HTML(open(BASE_PATH + "#{city}-restaurant-listings"))
+
     restaurants_array = []
+    binding.pry
 
-    get_page.css().each do |restaurant|
+    doc.css("div.rest-row-info").each do |restaurant|
       restaurant_hash = {
-
+        :name => 
       }
       restaurants_array << restaurant_hash
     end
