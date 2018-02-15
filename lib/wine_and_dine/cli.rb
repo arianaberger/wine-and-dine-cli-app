@@ -32,6 +32,7 @@ class WineAndDine::CLI
     elsif input == "2"
       puts "Retrieving the best restaurants in Miami..."
       get_list("miami") #make dynamic?
+
     elsif input == "3"
       puts "Let's check out the restaurants in DC"
     elsif input == "4"
@@ -55,7 +56,7 @@ class WineAndDine::CLI
     end
   end
 
-  def get_list(city)
+  def get_list(city) #dynamically post list of restaurants
     WineAndDine::Scraper.scrape_restaurants_list(city)
   end
 
