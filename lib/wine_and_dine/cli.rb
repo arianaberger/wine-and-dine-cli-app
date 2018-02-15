@@ -23,16 +23,10 @@ class WineAndDine::CLI
   def choose_city
     input = gets.strip
     if input == "1"
-      #execute NYC method for list of restaurants 1-5
       puts "Let's check out the restaurants in NYC..."
-      list_nyc
-        #get info from restaurant list for NYC
-          #pull into on an individual restaurants
-
     elsif input == "2"
       puts "Retrieving the best restaurants in Miami..."
       get_list("miami") #make dynamic?
-
     elsif input == "3"
       puts "Let's check out the restaurants in DC"
     elsif input == "4"

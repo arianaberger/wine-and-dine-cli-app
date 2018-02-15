@@ -7,7 +7,6 @@ class WineAndDine::Scraper
   # end
 
   def self.scrape_restaurants_list(city)
-
     doc = Nokogiri::HTML(open(BASE_PATH + "/#{city}-restaurant-listings"))
 
     restaurants_array = []
@@ -22,27 +21,20 @@ class WineAndDine::Scraper
         :url => BASE_PATH + restaurant.css("a.rest-row-name")[0]['href']
       }
       restaurants_array << restaurant_hash
-      binding.pry
     end
     restaurants_array
   end
 
-  def self.scrape_restaurant_details(restaurant_url) 
+  def self.scrape_restaurant_details(restaurant_url) #not working!
     doc = Nokogiri::HTML(open(restaurant_url))
-# doc = Nokogiri::HTML(open("https://www.opentable.com/council-oak-steaks-and-seafood-at-seminole-hard-rock-hotel-and-casino-hollywood-florida")
+# doc = Nokogiri::HTML(open("https://www.opentable.com/council-oak-steaks-and-seafood-at-seminole-hard-rock-hotel-and-casino-hollywood-florida"))
     restaurant_hash = {}
-    binding.pry
 
     restaurant_hash[:rating] =  doc.css("div._491257d8 span").text  + "/5"
     restaurant_hash[:location] = doc.css("div.a.dee8a254._0c64fd38").text
+
     # restaurant_hash[:telephone] =
     # restaurant_hash[:website] = link to visit open table to make reservation, or just company website
-
-
-
-
-
-
   end
 
 end
