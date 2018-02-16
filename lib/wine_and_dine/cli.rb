@@ -32,35 +32,29 @@ class WineAndDine::CLI
       puts "Let's check out the restaurants in DC"
     elsif input == "4"
       puts "Let's check out the restaurants in LA"
-    else #this needs to loop properly!
+
+     ####this is not looping properly!
+     else
       puts "I'm sorry, please enter the number or city name you'd like to dine in tonight:"
       input = gets.strip
-    end
-  end
-
-  def list_nyc
-    puts "Here are the NYC restaurants"
-    puts " 1. 2. 3. 4"
-    puts "Which would one would you like to know more about?"
-    input = gets.strip
-    if input == "1"
-      puts "GREAT"
-    else #this needs to loop properly!
-      puts "Which would one would you like to know more about?"
-      input = gets.strip
-    end
-  end
-
-  def display_list #dynamically post list of restaurants
-    WineAndDine::Restaurants.all.each do |r|
-      puts "#{r.name.upcase}"
-      puts "#{r.food_type}"
     end
   end
 
   def make_restaurants(city)
     r_array =  WineAndDine::Scraper.scrape_restaurants_list(city)
     WineAndDine::Restaurants.create_from_city(r_array)
+  end
+
+  def display_list
+    WineAndDine::Restaurants.all.each do |r|
+      puts ""
+      puts "----------"
+      puts "#{r.name.upcase}"
+      puts "Type:                     #{r.food_type}"
+      puts "Times available: #{r.times}"
+      puts "Price Range:              #{r.price}"
+
+    end
   end
 
 end

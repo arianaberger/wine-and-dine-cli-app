@@ -11,10 +11,7 @@ class WineAndDine::Scraper
 
     restaurants_array = []
 
-    doc.css("div.rest-row-info").each_with_index do |r, i| #need to limit the amount of restaurants we are seeing
-      # unless restaurant.css("div.rest-row-pricing").text != "$ $ $ $" >>how to only see priciest?
-binding.pry
-      while i <= 5
+    r = doc.css("div.rest-row-info")[0]
         restaurant_hash = {
           :name => r.css("span.rest-row-name-text").text,
           :food_type => r.css("span.rest-row-meta--cuisine").text,
@@ -23,13 +20,28 @@ binding.pry
           :url => BASE_PATH + r.css("a.rest-row-name")[0]['href']
         }
         restaurants_array << restaurant_hash
-      end
-    end
-    restaurants_array
 
+
+    ####why does just the first restaurant load?? then it hangs, even though the code works in pry
+    # doc.css("div.rest-row-info").each_with_index do |r, i|
+    #   #just choose the priciest restaurants?
+    #   until i == 1
+    #     restaurant_hash = {
+    #       :name => r.css("span.rest-row-name-text").text,
+    #       :food_type => r.css("span.rest-row-meta--cuisine").text,
+    #       :times => r.css("a.rest-row-times-btn").text.strip, #might need to iterate over divs
+    #       :price => r.css("div.rest-row-pricing").text.strip,
+    #       :url => BASE_PATH + r.css("a.rest-row-name")[0]['href']
+    #     }
+    #     restaurants_array << restaurant_hash
+    #   end
+    # end
+    # restaurants_array
+    # binding.pry
   end
 
-  def self.scrape_restaurant_details(restaurant_url) #not working!
+####not working!!!
+  def self.scrape_restaurant_details(restaurant_url)
     doc = Nokogiri::HTML(open(restaurant_url))
 # doc = Nokogiri::HTML(open("https://www.opentable.com/council-oak-steaks-and-seafood-at-seminole-hard-rock-hotel-and-casino-hollywood-florida"))
     restaurant_hash = {}
