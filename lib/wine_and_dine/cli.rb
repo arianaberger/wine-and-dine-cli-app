@@ -53,7 +53,6 @@ class WineAndDine::CLI
       puts "Type:                     #{r.food_type}"
       puts "Times available: #{r.times}"
       puts "Price Range:              #{r.price}"
-
     end
   end
 

@@ -9,13 +9,16 @@ class WineAndDine::Scraper
   def self.scrape_restaurants_list(city)
     doc = Nokogiri::HTML(open(BASE_PATH + "/#{city}-restaurant-listings"))
 
-    restaurants_array = []
+r.css("a.rest-row-times-btn")[3].text.strip
 
-    r = doc.css("div.rest-row-info")[0]
+
+    restaurants_array = []
+binding.pry
+    r = doc.css("div.rest-row-info")[1]
         restaurant_hash = {
           :name => r.css("span.rest-row-name-text").text,
           :food_type => r.css("span.rest-row-meta--cuisine").text,
-          :times => r.css("a.rest-row-times-btn").text.strip, #might need to iterate over divs
+          :times => r.css("a.rest-row-times-btn").each{|t| t.css("a.rest-row-times-btn").text unless t.css("a.rest-row-times-btn").text == "  "}.join(", "),
           :price => r.css("div.rest-row-pricing").text.strip,
           :url => BASE_PATH + r.css("a.rest-row-name")[0]['href']
         }
