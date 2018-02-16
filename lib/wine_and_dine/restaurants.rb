@@ -1,6 +1,6 @@
 class WineAndDine::Restaurants
 
-  attr_accessor :name, :food_type, :price, :times, :url
+  attr_accessor :name, :food_type, :price, :times, :rating, :url
 
   @@all = []
 

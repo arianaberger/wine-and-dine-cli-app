@@ -8,21 +8,44 @@ class WineAndDine::Scraper
 
   def self.scrape_restaurants_list(city)
     doc = Nokogiri::HTML(open(BASE_PATH + "/#{city}-restaurant-listings"))
+# Testing----------------
+#
+#
+#     t_1 = r.css("a.rest-row-times-btn")[0].text.strip
+#     t_2 = r.css("a.rest-row-times-btn")[1].text.strip
+#     t_3 = r.css("a.rest-row-times-btn")[2].text.strip
+#     t_4 = r.css("a.rest-row-times-btn")[3].text.strip
+#     t_5 = r.css("a.rest-row-times-btn")[4].text.strip
+#
+#     ###use this logic to get individual times
+#     times = [t_1, t_2, t_3, t_4, t_5].reject{|e| e.to_i == 0}.join(", ")
+#
+#     ##How is this possible? Why is it not recognizing the empy strings?
+#     [" ", " ", " ", "8:30 pm", "8:45 pm"]
+#     times.include?(" ")
+#     => false
+# ----------------
 
-r.css("a.rest-row-times-btn")[3].text.strip
-
+    r = doc.css("div.rest-row-info")[1]
 
     restaurants_array = []
-binding.pry
-    r = doc.css("div.rest-row-info")[1]
-        restaurant_hash = {
-          :name => r.css("span.rest-row-name-text").text,
-          :food_type => r.css("span.rest-row-meta--cuisine").text,
-          :times => r.css("a.rest-row-times-btn").each{|t| t.css("a.rest-row-times-btn").text unless t.css("a.rest-row-times-btn").text == "  "}.join(", "),
-          :price => r.css("div.rest-row-pricing").text.strip,
-          :url => BASE_PATH + r.css("a.rest-row-name")[0]['href']
-        }
-        restaurants_array << restaurant_hash
+
+    t_1 = r.css("a.rest-row-times-btn")[0].text.strip
+    t_2 = r.css("a.rest-row-times-btn")[1].text.strip
+    t_3 = r.css("a.rest-row-times-btn")[2].text.strip
+    t_4 = r.css("a.rest-row-times-btn")[3].text.strip
+    t_5 = r.css("a.rest-row-times-btn")[4].text.strip
+    times_r = [t_1, t_2, t_3, t_4, t_5].reject{|e| e.to_i == 0}.join(", ")
+
+    restaurant_hash = {
+      :name => r.css("span.rest-row-name-text").text,
+      :food_type => r.css("span.rest-row-meta--cuisine").text,
+      :times => times_r,
+      :price => r.css("div.rest-row-pricing i").text.strip.gsub(/\s+/, ""),
+      :rating => r.css("span.recommended-text").text.gsub("% Recommend", ""),
+      :url => BASE_PATH + r.css("a.rest-row-name")[0]['href']
+    }
+    restaurants_array << restaurant_hash
 
 
     ####why does just the first restaurant load?? then it hangs, even though the code works in pry
@@ -40,7 +63,6 @@ binding.pry
     #   end
     # end
     # restaurants_array
-    # binding.pry
   end
 
 ####not working!!!

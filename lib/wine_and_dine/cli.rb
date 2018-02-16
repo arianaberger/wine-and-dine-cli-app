@@ -50,9 +50,10 @@ class WineAndDine::CLI
       puts ""
       puts "----------"
       puts "#{r.name.upcase}"
-      puts "Type:                     #{r.food_type}"
-      puts "Times available: #{r.times}"
-      puts "Price Range:              #{r.price}"
+      puts "Type:               #{r.food_type}"
+      puts "Times available:    #{r.times}"
+      puts "Price Range:        #{r.price}"
+      puts "Rating:             #{r.rating}/100"
     end
   end
 
