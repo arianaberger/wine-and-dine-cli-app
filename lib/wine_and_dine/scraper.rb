@@ -11,18 +11,22 @@ class WineAndDine::Scraper
 
     restaurants_array = []
 
-    doc.css("div.rest-row-info").each do |restaurant| #need to limit the amount of restaurants we are seeing
+    doc.css("div.rest-row-info").each_with_index do |r, i| #need to limit the amount of restaurants we are seeing
       # unless restaurant.css("div.rest-row-pricing").text != "$ $ $ $" >>how to only see priciest?
-      restaurant_hash = {
-        :name => restaurant.css("span.rest-row-name-text").text,
-        :food_type => restaurant.css("span.rest-row-meta--cuisine").text,
-        :times => restaurant.css("a.rest-row-times-btn").text.strip, #might need to iterate over divs
-        :price => restaurant.css("div.rest-row-pricing").text.strip,
-        :url => BASE_PATH + restaurant.css("a.rest-row-name")[0]['href']
-      }
-      restaurants_array << restaurant_hash
+binding.pry
+      while i <= 5
+        restaurant_hash = {
+          :name => r.css("span.rest-row-name-text").text,
+          :food_type => r.css("span.rest-row-meta--cuisine").text,
+          :times => r.css("a.rest-row-times-btn").text.strip, #might need to iterate over divs
+          :price => r.css("div.rest-row-pricing").text.strip,
+          :url => BASE_PATH + r.css("a.rest-row-name")[0]['href']
+        }
+        restaurants_array << restaurant_hash
+      end
     end
     restaurants_array
+
   end
 
   def self.scrape_restaurant_details(restaurant_url) #not working!

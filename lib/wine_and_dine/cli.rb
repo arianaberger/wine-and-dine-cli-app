@@ -52,10 +52,9 @@ class WineAndDine::CLI
   end
 
   def display_list #dynamically post list of restaurants
-    WineAndDine::Restaurants.all.each_with_index do |r, i|
-        puts "#{r.name.upcase}"
-        puts "#{r.food_type}"
-      end
+    WineAndDine::Restaurants.all.each do |r|
+      puts "#{r.name.upcase}"
+      puts "#{r.food_type}"
     end
   end
 

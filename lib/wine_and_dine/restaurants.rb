@@ -11,8 +11,8 @@ class WineAndDine::Restaurants
 
   def self.create_from_city(restaurants_array) #this will be the array of restaurants from the scraper class
     #iterate and create a new restaurant for each, with initialize input the restaurant's hash of attributes
-    restaurants_array.each_with_index do |r|
-      WineAndDine::Restaurants.new(r)
+    restaurants_array.each do |r|
+        WineAndDine::Restaurants.new(r)
     end
   end
 
