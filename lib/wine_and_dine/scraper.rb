@@ -23,7 +23,7 @@ class WineAndDine::Scraper
 #     times.include?(" ")
 #     => false
 
-# TESTING, works on individual cases----------------
+# TESTING, works on individual cases:----------------
 
     r = doc.css("div.rest-row-info")[1]
 
