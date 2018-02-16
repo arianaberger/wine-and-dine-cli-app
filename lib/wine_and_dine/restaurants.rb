@@ -16,11 +16,11 @@ class WineAndDine::Restaurants
     end
   end
 
+  def self.create_from_restaurant(restaurant_url)
+  end
+
   def self.all
     @@all
   end
 
 end
-
-#find_city  to find city restaurants
-#find_retaurant to find specific retaurant details
