@@ -26,7 +26,8 @@ class WineAndDine::CLI
       puts "Let's check out the restaurants in NYC..."
     elsif input == "2"
       puts "Retrieving the best restaurants in Miami..."
-      get_list("miami") #make dynamic?
+      make_restaurants("miami") #make dynamic?
+      display_list
     elsif input == "3"
       puts "Let's check out the restaurants in DC"
     elsif input == "4"
@@ -50,8 +51,17 @@ class WineAndDine::CLI
     end
   end
 
-  def get_list(city) #dynamically post list of restaurants
-    WineAndDine::Scraper.scrape_restaurants_list(city)
+  def display_list #dynamically post list of restaurants
+    WineAndDine::Restaurants.all.each_with_index do |r, i|
+        puts "#{r.name.upcase}"
+        puts "#{r.food_type}"
+      end
+    end
+  end
+
+  def make_restaurants(city)
+    r_array =  WineAndDine::Scraper.scrape_restaurants_list(city)
+    WineAndDine::Restaurants.create_from_city(r_array)
   end
 
 end
