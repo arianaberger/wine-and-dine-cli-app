@@ -46,10 +46,10 @@ class WineAndDine::CLI
   end
 
   def display_list
-    WineAndDine::Restaurants.all.each do |r|
+    WineAndDine::Restaurants.all.each_with_index do |r, i|
       puts ""
       puts "----------"
-      puts "#{r.name.upcase}"
+      puts "#{i + 1}. #{r.name.upcase}"
       puts "Type:               #{r.food_type}"
       puts "Times available:    #{r.times}"
       puts "Price Range:        #{r.price}"

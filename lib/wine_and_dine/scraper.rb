@@ -25,56 +25,71 @@ class WineAndDine::Scraper
 
 # TESTING, works on individual cases:----------------
 
-    r = doc.css("div.rest-row-info")[1]
-
-    restaurants_array = []
-
-    t_1 = r.css("a.rest-row-times-btn")[0].text.strip
-    t_2 = r.css("a.rest-row-times-btn")[1].text.strip
-    t_3 = r.css("a.rest-row-times-btn")[2].text.strip
-    t_4 = r.css("a.rest-row-times-btn")[3].text.strip
-    t_5 = r.css("a.rest-row-times-btn")[4].text.strip
-    times_r = [t_1, t_2, t_3, t_4, t_5].reject{|e| e.to_i == 0}.join(", ")
-
-    restaurant_hash = {
-      :name => r.css("span.rest-row-name-text").text,
-      :food_type => r.css("span.rest-row-meta--cuisine").text,
-      :times => times_r,
-      :price => r.css("div.rest-row-pricing i").text.strip.gsub(/\s+/, ""),
-      :rating => r.css("span.recommended-text").text.gsub("% Recommend", ""),
-      :url => BASE_PATH + r.css("a.rest-row-name")[0]['href']
-    }
-    restaurants_array << restaurant_hash
-  end
+  #   r = doc.css("div.rest-row-info")[1]
+  #
+  #   restaurants_array = []
+  #
+  #   t_1 = r.css("a.rest-row-times-btn")[0].text.strip
+  #   t_2 = r.css("a.rest-row-times-btn")[1].text.strip
+  #   t_3 = r.css("a.rest-row-times-btn")[2].text.strip
+  #   t_4 = r.css("a.rest-row-times-btn")[3].text.strip
+  #   t_5 = r.css("a.rest-row-times-btn")[4].text.strip
+  #   times_r = [t_1, t_2, t_3, t_4, t_5].reject{|e| e.to_i == 0}.join(", ")
+  #
+  #   restaurant_hash = {
+  #     :name => r.css("span.rest-row-name-text").text,
+  #     :food_type => r.css("span.rest-row-meta--cuisine").text,
+  #     :times => times_r,
+  #     :price => r.css("div.rest-row-pricing i").text.strip.gsub(/\s+/, ""),
+  #     :rating => r.css("span.recommended-text").text.gsub("% Recommend", ""),
+  #     :url => BASE_PATH + r.css("a.rest-row-name")[0]['href']
+  #   }
+  #   restaurants_array << restaurant_hash
+  # end
 #------------TESTING END---------------------
 
 #------------My cli hangs when I try to iterate over the array of restaurants!!-----------
-  #   restaurants_array = []
+
+####Real Estate Example-----------
+  #   homes_array = []
+  #   doc = Nokogiri::HTML(open("http://www.longandfoster.com/homes-for-sale/VA/Richmond"))
   #
-  #   doc.css("div.rest-row-info").each_with_index do |r, i|
-  #
-  #     until i == 3
-  #
-  #       t_1 = r.css("a.rest-row-times-btn")[0].text.strip
-  #       t_2 = r.css("a.rest-row-times-btn")[1].text.strip
-  #       t_3 = r.css("a.rest-row-times-btn")[2].text.strip
-  #       t_4 = r.css("a.rest-row-times-btn")[3].text.strip
-  #       t_5 = r.css("a.rest-row-times-btn")[4].text.strip
-  #       times_r = [t_1, t_2, t_3, t_4, t_5].reject{|e| e.to_i == 0}.join(", ")
-  #
-  #        restaurant_hash = {
-  #         :name => r.css("span.rest-row-name-text").text,
-  #         :food_type => r.css("span.rest-row-meta--cuisine").text,
-  #         :times => times_r,
-  #         :price => r.css("div.rest-row-pricing i").text.strip.gsub(/\s+/, ""),
-  #         :rating => r.css("span.recommended-text").text.gsub("% Recommend", ""),
-  #         :url => BASE_PATH + r.css("a.rest-row-name")[0]['href']
-  #         }
-  #       restaurants_array << restaurant_hash
-  #      end
-  #    end
-  #   restaurants_array
+  #   doc.css("div.listview-result.panel.panel-default").each do |h|
+  #       home_hash = {
+  #         :name =>  h.css("span.listview-address").text.strip,
+  #         :price => h.css("span.listview-price").text.strip
+  #       }
+  #       if homes_array.count < 5 && home_hash[:price].gsub("$", "").to_i > 200
+  #         homes_array << home_hash
+  #       end
+  #   end
+  #   homes_array
   # end
+##------------------------
+      restaurants_array = []
+
+      doc.css("div.rest-row-info").each do |r|
+
+      # t_1 = r.css("div.rest-row-times")[0].text.strip
+      # t_2 = r.css("a.rest-row-times-btn")[1].text.strip
+      # t_3 = r.css("a.rest-row-times-btn")[2].text.strip
+      # t_4 = r.css("a.rest-row-times-btn")[3].text.strip
+      # t_5 = r.css("a.rest-row-times-btn")[4].text.strip
+      # times_r = [t_1, t_2, t_3, t_4, t_5].reject{|e| e.to_i == 0}.join(", ")
+      restaurant_hash = {
+        :name => r.css("span.rest-row-name-text").text,
+        :food_type => r.css("span.rest-row-meta--cuisine").text,
+        # :times => times_r,
+        :price => r.css("div.rest-row-pricing i").text.strip.gsub(/\s+/, ""),
+        :rating => r.css("span.recommended-text").text.gsub("% Recommend", ""),
+        :url => BASE_PATH + r.css("a.rest-row-name")[0]['href']
+        }
+        if restaurant_hash[:price] == "$$$$"
+          restaurants_array << restaurant_hash
+        end
+      end
+    restaurants_array
+  end
 
 #-----------scraping not working at all!!!----------------
   def self.scrape_restaurant_details(restaurant_url)
