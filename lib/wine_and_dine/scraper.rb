@@ -70,12 +70,12 @@ class WineAndDine::Scraper
 
       doc.css("div.rest-row-info").each do |r|
 
-      # t_1 = r.css("div.rest-row-times")[0].text.strip
-      # t_2 = r.css("a.rest-row-times-btn")[1].text.strip
-      # t_3 = r.css("a.rest-row-times-btn")[2].text.strip
-      # t_4 = r.css("a.rest-row-times-btn")[3].text.strip
-      # t_5 = r.css("a.rest-row-times-btn")[4].text.strip
-      # times_r = [t_1, t_2, t_3, t_4, t_5].reject{|e| e.to_i == 0}.join(", ")
+          # t_1 = r.css("a.rest-row-times-btn")[0].text.strip
+          # t_2 = r.css("a.rest-row-times-btn")[1].text.strip
+          # t_3 = r.css("a.rest-row-times-btn")[2].text.strip
+          # t_4 = r.css("a.rest-row-times-btn")[3].text.strip
+          # t_5 = r.css("a.rest-row-times-btn")[4].text.strip
+          # times_r = [t_1, t_2, t_3, t_4, t_5].reject{|e| e.to_i == 0}.join(", ")
       restaurant_hash = {
         :name => r.css("span.rest-row-name-text").text,
         :food_type => r.css("span.rest-row-meta--cuisine").text,

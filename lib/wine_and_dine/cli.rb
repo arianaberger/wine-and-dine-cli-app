@@ -15,7 +15,7 @@ class WineAndDine::CLI
     puts "1. NYC"
     puts "2. Miami"
     puts "3. Washington DC"
-    puts "4. Los Angeles"
+    puts "4. Las Vegas"
 
     choose_city
   end
@@ -29,9 +29,13 @@ class WineAndDine::CLI
       make_restaurants("miami") #make dynamic?
       display_list
     elsif input == "3"
-      puts "Let's check out the restaurants in DC"
+      puts "Retrieving the best restaurants in DC..."
+      make_restaurants("dc") #make dynamic?
+      display_list
     elsif input == "4"
-      puts "Let's check out the restaurants in LA"
+      puts "Retrieving the best restaurants in Vegas..."
+      make_restaurants("las-vegas") #make dynamic?
+      display_list
 
      ####this is not looping properly!
      else
@@ -51,7 +55,7 @@ class WineAndDine::CLI
       puts "----------"
       puts "#{i + 1}. #{r.name.upcase}"
       puts "Type:               #{r.food_type}"
-      puts "Times available:    #{r.times}"
+      # puts "Times available:    #{r.times}"
       puts "Price Range:        #{r.price}"
       puts "Rating:             #{r.rating}/100"
     end
